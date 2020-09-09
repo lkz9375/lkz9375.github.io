@@ -98,6 +98,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let resultItems = [];
     if (searchText.length > 0) {
       // Perform local searching
+
+      // ----------------------------------------------------------------------------
+      // 특정 URL에서 히든포스트 포함 검색
+      let contentList = datas;
+      if (location.pathname !== '/music/002/') {
+        contentList = contentList.filter((content) => !content.isHidden);
+      }
+
+      // 히든 포스트만 검색하고 싶으면 다음처럼
+      // const searchHiddenOnly = location.pathname === '/music/002/';
+      // contentList = contentList.filter((content) => searchHiddenOnly ? content.isHidden : !content.isHidden);
+      // ----------------------------------------------------------------------------
+
       datas.forEach(({ title, content, url }) => {
         let titleInLowerCase = title.toLowerCase();
         let contentInLowerCase = content.toLowerCase();
@@ -214,9 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
         isfetched = true;
         datas = isXml ? [...new DOMParser().parseFromString(res, 'text/xml').querySelectorAll('entry')].map(element => {
           return {
-            title  : element.querySelector('title').textContent,
-            content: element.querySelector('content').textContent,
-            url    : element.querySelector('url').textContent
+            title   : element.querySelector('title').textContent,
+            content : element.querySelector('content').textContent,
+            url     : element.querySelector('url').textContent,
+            isHidden: element.querySelector('content').textContent.includes('<!-- flag of hidden posts -->')
           };
         }) : JSON.parse(res);
         // Only match articles with not empty titles
