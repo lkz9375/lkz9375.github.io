@@ -100,18 +100,19 @@ document.addEventListener('DOMContentLoaded', () => {
       // Perform local searching
 
       // ----------------------------------------------------------------------------
-      // 특정 URL에서 히든포스트 포함 검색
       let contentList = datas;
-      if (location.pathname !== '/music/002/') {
-        contentList = contentList.filter((content) => !content.isHidden);
-      }
+
+      // 특정 URL에서 히든포스트 포함 검색
+      // if (location.pathname !== '/music/002/') {
+      //   contentList = contentList.filter((content) => !content.isHidden);
+      // }
 
       // 히든 포스트만 검색하고 싶으면 다음처럼
-      // const searchHiddenOnly = location.pathname === '/music/002/';
-      // contentList = contentList.filter((content) => searchHiddenOnly ? content.isHidden : !content.isHidden);
+       const searchHiddenOnly = location.pathname === '/music/002/';
+       contentList = contentList.filter((content) => searchHiddenOnly === content.isHidden);
       // ----------------------------------------------------------------------------
 
-      datas.forEach(({ title, content, url }) => {
+      contentList.forEach(({ title, content, url }) => {
         let titleInLowerCase = title.toLowerCase();
         let contentInLowerCase = content.toLowerCase();
         let indexOfTitle = [];
