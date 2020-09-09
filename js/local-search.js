@@ -108,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // }
 
       // 히든 포스트만 검색하고 싶으면 다음처럼
-       const searchHiddenOnly = location.pathname === '/music/002/';
-       contentList = contentList.filter((content) => searchHiddenOnly === content.isHidden);
+      const searchHiddenOnly = location.pathname === '/music/002/';
+      contentList = contentList.filter((content) => searchHiddenOnly === content.isHidden);
       // ----------------------------------------------------------------------------
 
       contentList.forEach(({ title, content, url }) => {
