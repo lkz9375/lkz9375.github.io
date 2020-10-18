@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //   contentList = contentList.filter((content) => !content.isHidden);
       // }
 
+      // 특정 URL로 시작하면 히든포스트만 포함 검색
+      const searchHiddenOnly = location.pathname.split('/')[1] === 'xxx';
+      contentList = contentList.filter((content) => searchHiddenOnly === content.isHidden);
+
       // 히든 포스트만 검색하고 싶으면 다음처럼
       // const searchHiddenOnly = location.pathname === '/music/002/';
       // contentList = contentList.filter((content) => searchHiddenOnly === content.isHidden);
